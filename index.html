@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mana Tithe</title>
+    <link rel="stylesheet" href="./dist/css/mystyles.css">
+  </head>
+  <body>
+		<div class="section">
+      <div class="container">
+        <h1 class="title has-text-centered">
+          Mana Tithe
+        </h1>
+
+        <p class="subtitle has-text-centered">
+          A tool to find the cheapest version of a Magic the Gathering deck list.
+        </p>
+
+        <pre id="error" class="notification is-danger"></pre>
+
+        <div class="field">
+          <p class="control">
+            <textarea id="decklist" class="textarea" placeholder="1 Card Name"></textarea>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control">
+          <label class="checkbox">
+            <input id="ignore-basics" type="checkbox" checked>
+            Ignore Price of Basic Lands
+          </label>
+          </p>
+        </div>
+
+        <div class="buttons">
+          <a id="go-btn" class="button is-primary">Find Lowest Price of Deck</a>
+        </div>
+
+        <progress id="progress" class="progress is-primary is-hidden" max="100">0</progress>
+
+        <h2 class="title is-hidden has-text-centered" id="total"></h2>
+
+        <table class="table is-hidden">
+          <thead>
+            <tr>
+              <th>Qty</th>
+              <th>Name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody id="card-entries">
+          </tbody>
+        </table>
+      </div>
+		</div>
+    <script src="./dist/js/bundle.js"></script>
+  </body>
+</html>
