@@ -4,6 +4,8 @@ const scryfall = require('scryfall-client');
 
 const IDS_PER_SEARCH = 18;
 
+const tooltip = document.getElementById('tooltip');
+const cardImageElement = document.getElementById('tooltip-img');
 const btn = document.getElementById('go-btn');
 const ignoreBasics = document.getElementById('ignore-basics');
 const total = document.getElementById('total')
@@ -11,6 +13,7 @@ const error = document.getElementById('error')
 const progress = document.getElementById('progress')
 const tableContainer = document.querySelector('.table')
 const decklist = document.getElementById('decklist');
+
 function setDisabled (isDisabled) {
   if (isDisabled) {
     decklist.setAttribute('disabled', true);
@@ -24,6 +27,15 @@ function setDisabled (isDisabled) {
     btn.classList.remove('is-loading');
   }
 }
+
+tooltip.style.display = "none";
+tooltip.style.pointerEvents = "none";
+tooltip.style.position = "fixed";
+tooltip.style.zIndex = "9000000";
+tooltip.style.borderRadius = "4.75% / 3.5%";
+tooltip.style.height = "340px";
+tooltip.style.width = "244px";
+tooltip.style.overflow = "hidden";
 
 btn.addEventListener("click", () => {
   setDisabled(true)
@@ -105,6 +117,7 @@ btn.addEventListener("click", () => {
       let price, purchaseLink;
       // if the card can't be found, assume a qty of 1
       const qty = (deck.find(e => e.name.split(' //')[0] === c.name.split(' //')[0]) || {qty: 1}).qty || 1;
+      const cardImage = c.getImage();
 
       switch (c.name.toLowerCase()) {
         case "island":
@@ -135,6 +148,28 @@ btn.addEventListener("click", () => {
       } else {
         priceElement.innerText = formattedPrice;
       }
+
+      nameElement.addEventListener("mousemove", (event) => {
+        if (window.innerWidth < 768) {
+          // window is too small to bother with presenting card image
+          return;
+        }
+
+        if (tooltip.style.display !== "block") {
+          tooltip.style.display = "block";
+        }
+
+        tooltip.style.left = event.clientX + 50 + "px";
+        tooltip.style.top = event.clientY - 30 + "px";
+
+        if (cardImageElement.src !== cardImage) {
+          cardImageElement.src = cardImage;
+        }
+      });
+
+      nameElement.addEventListener("mouseout", () => {
+        tooltip.style.display = "none";
+      });
 
       tr.appendChild(quantityElement);
       tr.appendChild(nameElement);
