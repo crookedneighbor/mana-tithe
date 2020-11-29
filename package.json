@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/crookedneighbor/mana-tithe#readme",
   "devDependencies": {
-    "bulma": "^0.9.0",
+    "bulma": "^0.9.1",
     "css-loader": "^3.6.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "http-server": "^0.12.3",
@@ -32,6 +32,6 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "scryfall-client": "^0.17.0"
+    "scryfall-client": "^0.18.5"
   }
 }
