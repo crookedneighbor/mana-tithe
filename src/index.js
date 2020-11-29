@@ -102,7 +102,7 @@ btn.addEventListener("click", () => {
       currency: 'USD',
     });
     cards.sort((a, b) => (a.name > b.name) ? 1 : -1).forEach(c => {
-      let price;
+      let price, purchaseLink;
       // if the card can't be found, assume a qty of 1
       const qty = (deck.find(e => e.name.split(' //')[0] === c.name.split(' //')[0]) || {qty: 1}).qty || 1;
 
@@ -118,6 +118,7 @@ btn.addEventListener("click", () => {
           }
         default:
           price = Number(c.getPrice() || 0);
+          purchaseLink = c.purchase_uris.tcgplayer;
       }
 
       totalPrice += price * 100 * qty;
@@ -128,7 +129,12 @@ btn.addEventListener("click", () => {
       const nameElement = document.createElement('td');
       nameElement.innerHTML = `<a href="${c.scryfall_uri}" target="_blank">${c.name}</a>`;
       const priceElement = document.createElement('td');
-      priceElement.innerText = moneyFormatter.format(price);
+      const formattedPrice = moneyFormatter.format(price)
+      if (purchaseLink) {
+        priceElement.innerHTML = `<a href="${purchaseLink}">${formattedPrice}</a>`;
+      } else {
+        priceElement.innerText = formattedPrice;
+      }
 
       tr.appendChild(quantityElement);
       tr.appendChild(nameElement);
