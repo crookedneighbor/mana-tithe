@@ -104,7 +104,7 @@ btn.addEventListener("click", () => {
     cards.sort((a, b) => (a.name > b.name) ? 1 : -1).forEach(c => {
       let price;
       // if the card can't be found, assume a qty of 1
-      const qty = (deck.find(e => e.name.split(' //')[0] === c.name.split(' //')[0]) || {qty: 1}).qty;
+      const qty = (deck.find(e => e.name.split(' //')[0] === c.name.split(' //')[0]) || {qty: 1}).qty || 1;
 
       switch (c.name.toLowerCase()) {
         case "island":
