@@ -54,9 +54,12 @@ btn.addEventListener("click", () => {
     return entry;
   }).map((entry) => {
     const matches = entry.match(/^((\d*)(x?) )?(.*)$/);
+    const qty = matches[2] || "";
+    const name = (matches[4] || "").split(/[\/\(]/)[0].trim();
+
     return {
-      qty: matches[2],
-      name: matches[4]
+      qty,
+      name
     }
   });
 
