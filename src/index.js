@@ -28,6 +28,19 @@ function setDisabled(isDisabled) {
   }
 }
 
+function processDeckFromRawText(rawDeck) {
+  return rawDeck.map((entry) => {
+    const matches = entry.match(/^((\d*)(x?) )?(.*)$/);
+    const qty = matches[2] || "";
+    const name = (matches[4] || "").split(/[\/\(]/)[0].trim();
+
+    return {
+      qty,
+      name,
+    };
+  });
+}
+
 tooltip.style.display = "none";
 tooltip.style.pointerEvents = "none";
 tooltip.style.position = "fixed";
@@ -40,31 +53,21 @@ tooltip.style.overflow = "hidden";
 btn.addEventListener("click", () => {
   setDisabled(true);
 
-  const deck = decklist.value
-    .split("\n")
-    .filter((entry) => {
-      if (!entry) {
-        // ignore blank entries
-        return;
-      }
+  const rawDeck = decklist.value.split("\n").filter((entry) => {
+    if (!entry || !entry.trim()) {
+      // ignore blank entries
+      return;
+    }
 
-      if (entry.charAt(0) === "/") {
-        // ignore entries that start with a / denoting a comment
-        return;
-      }
+    if (entry.charAt(0) === "/") {
+      // ignore entries that start with a / denoting a comment
+      return;
+    }
 
-      return entry;
-    })
-    .map((entry) => {
-      const matches = entry.match(/^((\d*)(x?) )?(.*)$/);
-      const qty = matches[2] || "";
-      const name = (matches[4] || "").split(/[\/\(]/)[0].trim();
+    return entry.trim();
+  });
 
-      return {
-        qty,
-        name,
-      };
-    });
+  const deck = processDeckFromRawText(rawDeck);
 
   // include an extra one for the getCollection request
   const totalProgress = Math.ceil(deck.length / IDS_PER_SEARCH) + 1;
