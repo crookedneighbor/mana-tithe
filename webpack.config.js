@@ -7,6 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/bundle.js'
   },
+  mode: process.env.NODE_ENV || 'development',
   module: {
     rules: [{
       test: /\.scss$/,
