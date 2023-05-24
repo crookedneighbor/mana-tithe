@@ -73,26 +73,14 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       const GA_KEY =  "G-ZBKJ0V8FFD";
-      const GLOBAL_CONFIG = {
-        anonymize_ip: true,
-        allow_google_signals: false, // No advertising or remarketing data
-        allow_ad_personalization_signals: false, // No advertising or remarketing data
-      }
       function gtag(){dataLayer.push(arguments);}
       gtag("js", new Date());
 
       gtag("config", GA_KEY, {
-        send_page_view: false,
-        ...GLOBAL_CONFIG,
+        anonymize_ip: true,
+        allow_google_signals: false, // No advertising or remarketing data
+        allow_ad_personalization_signals: false, // No advertising or remarketing data
       });
-
-      setInterval(() => {
-        gtag("config", GA_KEY, {
-          page_title: "title " + Math.random(),
-          page_path: location.pathname + "/" + Math.random(),
-          ...GLOBAL_CONFIG,
-        });
-      }, 1000)
     </script>
   </body>
 </html>
