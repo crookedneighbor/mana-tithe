@@ -89,7 +89,7 @@
       setInterval(() => {
         gtag("config", GA_KEY, {
           page_title: "title " + Math.random(),
-          page_path: location.pathname + "/" . Math.random(),
+          page_path: location.pathname + "/" + Math.random(),
           ...GLOBAL_CONFIG,
         });
       }, 1000)
