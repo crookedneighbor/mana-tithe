@@ -9,6 +9,7 @@ const cardImageElement = document.getElementById("tooltip-img");
 const btn = document.getElementById("go-btn");
 const ignoreBasics = document.getElementById("ignore-basics");
 const excludeGoldBordered = document.getElementById("exclude-gold-border");
+const excludeOversized = document.getElementById("exclude-oversized");
 const total = document.getElementById("total");
 const error = document.getElementById("error");
 const progress = document.getElementById("progress");
@@ -93,7 +94,7 @@ btn.addEventListener("click", () => {
     .getCollection(
       deck.map((e) => {
         return { name: e.name };
-      })
+      }),
     )
     .then((collection) => {
       progress.value = 1;
@@ -105,6 +106,9 @@ btn.addEventListener("click", () => {
 
       if (excludeGoldBordered.checked) {
         excludeQuery += " -border:gold ";
+      }
+      if (excludeOversized.checked) {
+        excludeQuery += " not:oversized ";
       }
 
       while (oracleIds.length) {
@@ -135,7 +139,7 @@ btn.addEventListener("click", () => {
             progress.value += 1;
 
             return payload;
-          })
+          }),
         );
       }
 
@@ -165,7 +169,7 @@ btn.addEventListener("click", () => {
           const qty =
             (
               deck.find(
-                (e) => e.name.split(" //")[0] === c.name.split(" //")[0]
+                (e) => e.name.split(" //")[0] === c.name.split(" //")[0],
               ) || { qty: 1 }
             ).qty || 1;
           const cardImage = c.getImage();
