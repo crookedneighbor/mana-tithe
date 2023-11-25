@@ -21,15 +21,15 @@
   "homepage": "https://github.com/crookedneighbor/mana-tithe#readme",
   "devDependencies": {
     "bulma": "^0.9.4",
-    "css-loader": "^6.7.3",
+    "css-loader": "^6.8.1",
     "http-server": "^14.1.1",
-    "mini-css-extract-plugin": "^2.7.5",
-    "node-sass": "^8.0.0",
-    "prettier": "^2.8.8",
-    "sass-loader": "^13.2.2",
-    "style-loader": "^3.3.2",
-    "webpack": "^5.81.0",
-    "webpack-cli": "^5.0.2"
+    "mini-css-extract-plugin": "^2.7.6",
+    "node-sass": "^9.0.0",
+    "prettier": "^3.1.0",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "scryfall-client": "^0.23.1"

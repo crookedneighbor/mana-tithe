@@ -92,7 +92,7 @@ btn.addEventListener("click", () => {
     .getCollection(
       deck.map((e) => {
         return { name: e.name };
-      })
+      }),
     )
     .then((collection) => {
       progress.value = 1;
@@ -129,7 +129,7 @@ btn.addEventListener("click", () => {
             progress.value += 1;
 
             return payload;
-          })
+          }),
         );
       }
 
@@ -159,7 +159,7 @@ btn.addEventListener("click", () => {
           const qty =
             (
               deck.find(
-                (e) => e.name.split(" //")[0] === c.name.split(" //")[0]
+                (e) => e.name.split(" //")[0] === c.name.split(" //")[0],
               ) || { qty: 1 }
             ).qty || 1;
           const cardImage = c.getImage();
