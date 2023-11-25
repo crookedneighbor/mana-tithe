@@ -8,6 +8,7 @@ const tooltip = document.getElementById("tooltip");
 const cardImageElement = document.getElementById("tooltip-img");
 const btn = document.getElementById("go-btn");
 const ignoreBasics = document.getElementById("ignore-basics");
+const excludeGoldBordered = document.getElementById("exclude-gold-border");
 const total = document.getElementById("total");
 const error = document.getElementById("error");
 const progress = document.getElementById("progress");
@@ -92,13 +93,19 @@ btn.addEventListener("click", () => {
     .getCollection(
       deck.map((e) => {
         return { name: e.name };
-      }),
+      })
     )
     .then((collection) => {
       progress.value = 1;
       progress.innerText = progress.value + "%";
       const batches = [];
       const oracleIds = collection.map((c) => c.oracle_id);
+
+      let excludeQuery = "";
+
+      if (excludeGoldBordered.checked) {
+        excludeQuery += " -border:gold ";
+      }
 
       while (oracleIds.length) {
         const query =
@@ -107,7 +114,7 @@ btn.addEventListener("click", () => {
             .splice(0, IDS_PER_SEARCH)
             .map((id) => `oracle_id:"${id}"`)
             .join(" or ") +
-          ") prefer:usd-low usd>0";
+          `) prefer:usd-low usd>0 + ${excludeQuery}`;
         batches.push(
           scryfall.search(query).then((res) => {
             // the SLD full deck has a peculiar quirk, where some magic cards have the same oracle id for 2 faces
@@ -125,11 +132,10 @@ btn.addEventListener("click", () => {
               return false;
             });
 
-            console.log(payload);
             progress.value += 1;
 
             return payload;
-          }),
+          })
         );
       }
 
@@ -159,7 +165,7 @@ btn.addEventListener("click", () => {
           const qty =
             (
               deck.find(
-                (e) => e.name.split(" //")[0] === c.name.split(" //")[0],
+                (e) => e.name.split(" //")[0] === c.name.split(" //")[0]
               ) || { qty: 1 }
             ).qty || 1;
           const cardImage = c.getImage();
