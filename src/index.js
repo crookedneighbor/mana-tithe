@@ -107,7 +107,7 @@ btn.addEventListener("click", () => {
             .splice(0, IDS_PER_SEARCH)
             .map((id) => `oracle_id:"${id}"`)
             .join(" or ") +
-          ") prefer:usd-low usd>0";
+          ") prefer:usd-low usd>0 -border:gold";
         batches.push(
           scryfall.search(query).then((res) => {
             // the SLD full deck has a peculiar quirk, where some magic cards have the same oracle id for 2 faces
