@@ -6,22 +6,22 @@
 
 h1,
 h2 {
-	font-family: Nunito, sans-serif;
-	@apply mt-6;
+  font-family: Nunito, sans-serif;
+  @apply mt-6;
 }
 
 h1 {
-	@apply font-bold text-5xl;
+  @apply font-bold text-5xl;
 }
 
 h2 {
-	@apply font-normal text-3xl;
+  @apply font-normal text-3xl;
 }
 
 p {
-	@apply my-4;
+  @apply my-4;
 }
 
 a {
-	@apply text-action;
+  @apply text-action;
 }

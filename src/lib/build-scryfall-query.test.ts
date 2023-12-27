@@ -1,50 +1,52 @@
-import buildScryfallQuery, { type LookupPricesOptions } from './build-scryfall-query';
+import buildScryfallQuery, {
+  type LookupPricesOptions,
+} from "./build-scryfall-query";
 
-describe('buildScryfallQuery', () => {
-	let oraclesIds: string[];
-	let options: LookupPricesOptions;
+describe("buildScryfallQuery", () => {
+  let oraclesIds: string[];
+  let options: LookupPricesOptions;
 
-	beforeEach(() => {
-		oraclesIds = ['abc', 'def'];
-		options = {
-			excludeGoldBordered: false,
-			excludeOversized: false
-		};
-	});
+  beforeEach(() => {
+    oraclesIds = ["abc", "def"];
+    options = {
+      excludeGoldBordered: false,
+      excludeOversized: false,
+    };
+  });
 
-	it('builds a query with provided oracle ids', () => {
-		const query = buildScryfallQuery(oraclesIds, options);
+  it("builds a query with provided oracle ids", () => {
+    const query = buildScryfallQuery(oraclesIds, options);
 
-		expect(query).toContain('(oracle_id:"abc" or oracle_id:"def")');
-	});
+    expect(query).toContain('(oracle_id:"abc" or oracle_id:"def")');
+  });
 
-	it('builds a query looking for the lowest usd price', () => {
-		const query = buildScryfallQuery(oraclesIds, options);
+  it("builds a query looking for the lowest usd price", () => {
+    const query = buildScryfallQuery(oraclesIds, options);
 
-		expect(query).toContain('prefer:usd-low usd>0');
-	});
+    expect(query).toContain("prefer:usd-low usd>0");
+  });
 
-	it('excludes gold bordered cards when configured', () => {
-		const originalQuery = buildScryfallQuery(oraclesIds, options);
+  it("excludes gold bordered cards when configured", () => {
+    const originalQuery = buildScryfallQuery(oraclesIds, options);
 
-		expect(originalQuery).not.toContain('-border:gold');
+    expect(originalQuery).not.toContain("-border:gold");
 
-		options.excludeGoldBordered = true;
+    options.excludeGoldBordered = true;
 
-		const query = buildScryfallQuery(oraclesIds, options);
+    const query = buildScryfallQuery(oraclesIds, options);
 
-		expect(query).toContain('-border:gold');
-	});
+    expect(query).toContain("-border:gold");
+  });
 
-	it('excludes oversized cards when configured', () => {
-		const originalQuery = buildScryfallQuery(oraclesIds, options);
+  it("excludes oversized cards when configured", () => {
+    const originalQuery = buildScryfallQuery(oraclesIds, options);
 
-		expect(originalQuery).not.toContain('not:oversized');
+    expect(originalQuery).not.toContain("not:oversized");
 
-		options.excludeOversized = true;
+    options.excludeOversized = true;
 
-		const query = buildScryfallQuery(oraclesIds, options);
+    const query = buildScryfallQuery(oraclesIds, options);
 
-		expect(query).toContain('not:oversized');
-	});
+    expect(query).toContain("not:oversized");
+  });
 });
