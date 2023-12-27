@@ -1,4 +1,4 @@
-name: Deploy Nuxt site to Github Pages
+name: Deploy Svelte site to Github Pages
 
 on:
   push:
@@ -36,19 +36,19 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            dist
-            .nuxt
-          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
+            build
+            .svelte-kit
+          key: ${{ runner.os }}-svelte-build-${{ hashFiles('build') }}
           restore-keys: |
-            ${{ runner.os }}-nuxt-build-
+            ${{ runner.os }}-svelte-build-
       - name: Install dependencies
         run: npm ci
-      - name: Static HTML export with Nuxt
+      - name: Static HTML export with Svelte
         run: npm run generate
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./dist
+          path: ./build
 
   # Deployment job
   deploy:
