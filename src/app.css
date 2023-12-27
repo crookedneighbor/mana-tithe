@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2 {
+	font-family: Nunito, sans-serif;
+	@apply mt-6;
+}
+
+h1 {
+	@apply font-bold text-5xl;
+}
+
+h2 {
+	@apply font-normal text-3xl;
+}
+
+p {
+	@apply my-4;
+}
+
+a {
+	@apply text-action;
+}
