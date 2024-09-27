@@ -12,6 +12,7 @@ export type CardRow = {
 
 export type DeckResultOptions = {
     ignorePriceOfBasicLands: boolean;
+	ignorePriceOfTokens: boolean;
 };
 
 export default function convertScryfallResultsToDeckResults(
@@ -51,6 +52,13 @@ export default function convertScryfallResultsToDeckResults(
                 break;
             default:
         }
+
+		if (card.type_line.includes('Token')) {
+			if (options.ignorePriceOfTokens) {
+				price = 0;
+				tcgPlayerLink = '';
+			}
+		}
 
         return {
             qty: cardInDecklist.qty,

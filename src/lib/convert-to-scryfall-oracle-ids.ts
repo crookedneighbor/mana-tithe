@@ -15,7 +15,7 @@ export default async function convertToScryfallOracleIds(deck: Deck) {
 				"cards/search", 
 				{ q: `!"${deckAsNames[i].name}" -is:split -is:flip -is:transform -is:meld -is:leveler -is:dfc -is:mdfc` }
 			);
-			collection[i] = search.data[0];
+			collection[i] = search[0];
 		}
 	}
 
