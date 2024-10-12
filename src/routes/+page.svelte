@@ -16,6 +16,7 @@
 	let decklist = '';
 
 	let ignoreBasicLands = true;
+	let ignoreTokens = true;
 	let excludeGoldBordered = true;
 	let excludeOversized = true;
 
@@ -40,7 +41,8 @@
 		);
 
 		return convertScryfallResultsToDeckResults(payload, deck, {
-			ignorePriceOfBasicLands: ignoreBasicLands
+			ignorePriceOfBasicLands: ignoreBasicLands,
+			ignorePriceOfTokens: ignoreTokens
 		});
 	}
 	let searchPromise: Promise<CardRow[]>;
@@ -88,7 +90,7 @@
 			<Warnings {collection} />
 		{/if}
 
-		<ExclusionOptions bind:ignoreBasicLands bind:excludeGoldBordered bind:excludeOversized />
+		<ExclusionOptions bind:ignoreBasicLands bind:ignoreTokens bind:excludeGoldBordered bind:excludeOversized />
 
 		<SubmitButton disabled={lookupInProgress} />
 	</form>
