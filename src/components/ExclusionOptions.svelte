@@ -2,6 +2,7 @@
 	import CheckboxInput from './CheckboxInput.svelte';
 
 	export let ignoreBasicLands: boolean;
+	export let ignoreTokens: boolean;
 	export let excludeGoldBordered: boolean;
 	export let excludeOversized: boolean;
 </script>
@@ -11,6 +12,7 @@
 	label="Ignore Price of Basic Lands"
 	bind:checked={ignoreBasicLands}
 />
+<CheckboxInput id="ignore-tokens" label="Ignore Price of Tokens" bind:checked={ignoreTokens} />
 <CheckboxInput
 	id="exclude-gold-border"
 	label="Exclude Gold Bordered Prints"
