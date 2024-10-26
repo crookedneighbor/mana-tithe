@@ -113,10 +113,10 @@ export default async function convertScryfallResultsToDeckResults(
 	deck: Deck,
 	options: DeckResultOptions
 ): Promise<CardRow[]> {
-	let cardRows: CardRow[] = [];
+	const cardRows: CardRow[] = [];
 
 	for (let i = 0; i < scryfallPayload.length; i++) {
-		let originalCard = scryfallPayload[i];
+		const originalCard = scryfallPayload[i];
 		const cardInDecklist = findCardInDeckList(originalCard.name, deck);
 
 		if (!cardInDecklist) {
