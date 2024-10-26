@@ -33,7 +33,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Static HTML export with Svelte
         run: npm run build
       - name: Upload artifact
