@@ -4,8 +4,9 @@
 
 	export let collection: Awaited<ReturnType<typeof convertToScryfallOracleIds>>;
 	$: warningErrors = collection?.warnings;
+
+	// @ts-expect-error doesn't have a great type definition for the not found stuff
 	$: notFoundErrors = collection?.notFound.map((card) => {
-		// @ts-expect-error doesn't have a great type definition for the not found stuff
 		return `${card.name} could not be found. Check your spelling.`;
 	});
 	$: showWarnings = collection && (notFoundErrors.length > 0 || warningErrors.length > 0);
