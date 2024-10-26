@@ -15,11 +15,12 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4
-        with:
-          node-version-file: '.nvmrc'
 
       - name: Setup node env 🏗
         uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version-file: '.nvmrc'
 
       - name: Cache node_modules 📦
         uses: actions/cache@v3
