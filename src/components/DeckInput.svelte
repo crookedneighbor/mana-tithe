@@ -4,7 +4,7 @@
 
 <div>
 	<label for="deck-input" class="sr-only">Decklist</label>
-	<textarea id="deck-input" placeholder="1 Card Name" bind:value={decklist} />
+	<textarea id="deck-input" placeholder="1 Card Name" bind:value={decklist}></textarea>
 </div>
 
 <style lang="postcss">
