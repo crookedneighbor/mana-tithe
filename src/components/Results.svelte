@@ -3,20 +3,24 @@
 	import { fade } from 'svelte/transition';
 	import CardTooltip from './CardTooltip.svelte';
 
-	export let results: CardRow[] = [];
+	interface Props {
+		results?: CardRow[];
+	}
 
-	let tooltipCard: CardRow | null;
-	let tooltipMouseEvent: MouseEvent;
+	let { results = [] }: Props = $props();
+
+	let tooltipCard: CardRow | null = $state();
+	let tooltipMouseEvent: MouseEvent = $state();
 
 	const moneyFormatter = new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'USD'
 	});
 
-	$: totalPriceAsNumber = results.reduce((total, row) => {
+	let totalPriceAsNumber = $derived(results.reduce((total, row) => {
 		return total + row.qty * Number(row.price);
-	}, 0);
-	$: totalPrice = moneyFormatter.format(totalPriceAsNumber);
+	}, 0));
+	let totalPrice = $derived(moneyFormatter.format(totalPriceAsNumber));
 	const rowPrice = (price: number, qty: number) => {
 		return moneyFormatter.format(Number(price) * qty);
 	};
@@ -57,11 +61,11 @@
 					<td data-testid={`result-row-${index}-qty`}>{card.qty}</td>
 					<td data-testid={`result-row-${index}-name`}
 						><a
-							on:mousemove={(e) => {
+							onmousemove={(e) => {
 								handleCardHover(card, e);
 							}}
-							on:mouseout={handleCardHoverOut}
-							on:blur={handleCardHoverOut}
+							onmouseout={handleCardHoverOut}
+							onblur={handleCardHoverOut}
 							href={card.scryfallLink}
 							target="_blank">{card.name}</a
 						></td

@@ -1,5 +1,9 @@
 <script lang="ts">
-	export let decklist: string;
+	interface Props {
+		decklist: string;
+	}
+
+	let { decklist = $bindable() }: Props = $props();
 </script>
 
 <div>

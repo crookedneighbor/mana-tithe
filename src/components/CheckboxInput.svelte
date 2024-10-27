@@ -1,7 +1,11 @@
 <script lang="ts">
-	export let label: string;
-	export let id: string;
-	export let checked: boolean;
+	interface Props {
+		label: string;
+		id: string;
+		checked: boolean;
+	}
+
+	let { label, id, checked = $bindable() }: Props = $props();
 </script>
 
 <label for={id}>

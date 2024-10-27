@@ -1,8 +1,14 @@
 <script>
 	import { fade } from 'svelte/transition';
 
-	export let progress = 0;
-	export let maxProgress = 0;
+	/**
+	 * @typedef {Object} Props
+	 * @property {number} [progress]
+	 * @property {number} [maxProgress]
+	 */
+
+	/** @type {Props} */
+	let { progress = 0, maxProgress = 0 } = $props();
 </script>
 
 <div class="progress-bar-container" transition:fade={{ duration: 300 }}>

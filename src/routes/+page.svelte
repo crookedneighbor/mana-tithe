@@ -13,17 +13,17 @@
 	} from '$lib/convert-scryfall-results-to-deck-results';
 	import Warnings from '../components/Warnings.svelte';
 
-	let decklist = '';
+	let decklist = $state('');
 
-	let ignoreBasicLands = true;
-	let ignoreTokens = true;
-	let excludeGoldBordered = true;
-	let excludeOversized = true;
+	let ignoreBasicLands = $state(true);
+	let ignoreTokens = $state(true);
+	let excludeGoldBordered = $state(true);
+	let excludeOversized = $state(true);
 
-	let lookupInProgress = false;
-	let progress = 0;
-	let maxProgress = 0;
-	let collection: Awaited<ReturnType<typeof convertToScryfallOracleIds>>;
+	let lookupInProgress = $state(false);
+	let progress = $state(0);
+	let maxProgress = $state(0);
+	let collection: undefined | Awaited<ReturnType<typeof convertToScryfallOracleIds>> = $state();
 
 	async function gatherResults(deck: Deck) {
 		collection = await convertToScryfallOracleIds(deck);
@@ -45,7 +45,7 @@
 			ignorePriceOfTokens: ignoreTokens
 		});
 	}
-	let searchPromise: Promise<CardRow[]>;
+	let searchPromise: undefined | Promise<CardRow[]> = $state();
 
 	const submit = async (e: SubmitEvent) => {
 		e.preventDefault();
@@ -84,7 +84,7 @@
 		at once will likely be substantially higher.
 	</p>
 
-	<form on:submit={submit}>
+	<form onsubmit={submit}>
 		<DeckInput bind:decklist />
 		{#if collection}
 			<Warnings {collection} />
@@ -102,7 +102,7 @@
 
 	{#if searchPromise}
 		{#await searchPromise}
-			<ProgressBar bind:progress bind:maxProgress />
+			<ProgressBar {progress} {maxProgress} />
 		{:then results}
 			{#if results.length > 0}
 				<Results {results} />

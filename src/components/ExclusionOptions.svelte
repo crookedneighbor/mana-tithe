@@ -1,10 +1,19 @@
 <script lang="ts">
 	import CheckboxInput from './CheckboxInput.svelte';
 
-	export let ignoreBasicLands: boolean;
-	export let ignoreTokens: boolean;
-	export let excludeGoldBordered: boolean;
-	export let excludeOversized: boolean;
+	interface Props {
+		ignoreBasicLands: boolean;
+		ignoreTokens: boolean;
+		excludeGoldBordered: boolean;
+		excludeOversized: boolean;
+	}
+
+	let {
+		ignoreBasicLands = $bindable(),
+		ignoreTokens = $bindable(),
+		excludeGoldBordered = $bindable(),
+		excludeOversized = $bindable()
+	}: Props = $props();
 </script>
 
 <CheckboxInput

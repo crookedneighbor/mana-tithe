@@ -2,14 +2,18 @@
 	import type convertToScryfallOracleIds from '$lib/convert-to-scryfall-oracle-ids';
 	import { fade } from 'svelte/transition';
 
-	export let collection: Awaited<ReturnType<typeof convertToScryfallOracleIds>>;
-	$: warningErrors = collection?.warnings;
+	interface Props {
+		collection: Awaited<ReturnType<typeof convertToScryfallOracleIds>>;
+	}
+
+	let { collection }: Props = $props();
+	let warningErrors = $derived(collection?.warnings);
 
 	// @ts-expect-error doesn't have a great type definition for the not found stuff
-	$: notFoundErrors = collection?.notFound.map((card) => {
+	let notFoundErrors = $derived(collection?.notFound.map((card) => {
 		return `${card.name} could not be found. Check your spelling.`;
-	});
-	$: showWarnings = collection && (notFoundErrors.length > 0 || warningErrors.length > 0);
+	}));
+	let showWarnings = $derived(collection && (notFoundErrors.length > 0 || warningErrors.length > 0));
 </script>
 
 {#if showWarnings}

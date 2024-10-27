@@ -2,12 +2,16 @@
 	import type { CardRow } from '$lib/convert-scryfall-results-to-deck-results';
 	import { fade } from 'svelte/transition';
 
-	export let card: CardRow | null;
-	export let mouseEvent: MouseEvent;
+	interface Props {
+		card: CardRow | null;
+		mouseEvent: MouseEvent;
+	}
 
-	$: leftPosition = `${mouseEvent?.clientX + 50}px`;
-	$: topPosition = `${mouseEvent?.clientY - 30}px`;
-	$: altText = `${card?.name} card image`;
+	let { card, mouseEvent }: Props = $props();
+
+	let leftPosition = $derived(`${mouseEvent?.clientX + 50}px`);
+	let topPosition = $derived(`${mouseEvent?.clientY - 30}px`);
+	let altText = $derived(`${card?.name} card image`);
 </script>
 
 {#if card}
