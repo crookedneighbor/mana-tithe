@@ -12,8 +12,11 @@
 		type CardRow
 	} from '$lib/convert-scryfall-results-to-deck-results';
 	import Warnings from '../components/Warnings.svelte';
+	import scryfall from 'scryfall-client';
 
 	let decklist = $state('');
+
+	scryfall.setUserAgent('mana-tithe');
 
 	let ignoreBasicLands = $state(true);
 	let ignoreTokens = $state(true);
