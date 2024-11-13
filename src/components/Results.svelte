@@ -17,9 +17,11 @@
 		currency: 'USD'
 	});
 
-	let totalPriceAsNumber = $derived(results.reduce((total, row) => {
-		return total + row.qty * Number(row.price);
-	}, 0));
+	let totalPriceAsNumber = $derived(
+		results.reduce((total, row) => {
+			return total + row.qty * Number(row.price);
+		}, 0)
+	);
 	let totalPrice = $derived(moneyFormatter.format(totalPriceAsNumber));
 	const rowPrice = (price: number, qty: number) => {
 		return moneyFormatter.format(Number(price) * qty);

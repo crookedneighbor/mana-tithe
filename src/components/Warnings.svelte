@@ -10,10 +10,14 @@
 	let warningErrors = $derived(collection?.warnings);
 
 	// @ts-expect-error doesn't have a great type definition for the not found stuff
-	let notFoundErrors = $derived(collection?.notFound.map((card) => {
-		return `${card.name} could not be found. Check your spelling.`;
-	}));
-	let showWarnings = $derived(collection && (notFoundErrors.length > 0 || warningErrors.length > 0));
+	let notFoundErrors = $derived(
+		collection?.notFound.map((card) => {
+			return `${card.name} could not be found. Check your spelling.`;
+		})
+	);
+	let showWarnings = $derived(
+		collection && (notFoundErrors.length > 0 || warningErrors.length > 0)
+	);
 </script>
 
 {#if showWarnings}
